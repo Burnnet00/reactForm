@@ -22,7 +22,8 @@ class User extends React.Component {
                         editForm: !this.state.editForm
                     })
                 }} className='edit-icons'/>
-                <h3>{this.user.name} {this.user.lastname}</h3>
+                <h3>{this.user.first_name} {this.user.last_name}</h3>
+                <img src={this.user.avatar} />
                 <p>{this.user.about}</p>
                 <b>{this.user.isHappy ? '(^^)' : ':('}</b>
 
