@@ -3,8 +3,8 @@ import {IoCloseCircleSharp, IoHammerSharp} from "react-icons/io5";
 
 
 class AddUser extends React.Component {
-    user = this.props.user
-
+    /*user = this.props.user*/
+    userAdd = {}
     constructor(props) {
         super(props);
         this.state = {
@@ -28,13 +28,17 @@ class AddUser extends React.Component {
                 <input type="checkbox" id="isHappy" onChange={(e) => this.setState({isHappy: e.target.checked})}/>
                 <button type='button' onClick={() =>{
                     this.myForm.reset()
-                    this.props.onAdd({
+                    this.userAdd = {
                         name: this.state.name,
                         lastname: this.state.lastname,
                         age: this.state.age,
                         about: this.state.about,
                         isHappy: this.state.isHappy,
-                    })
+                    }
+                    if (this.props.user)
+                        this.userAdd.id = this.props.user.id
+                    this.props.onAdd(this.userAdd)
+
                 }
                 }>Add</button>
             </form>
