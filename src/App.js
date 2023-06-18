@@ -1,7 +1,8 @@
 import React from "react";
 import Header from "./components/Header";
 import Users from "./components/Users";
-import AddUser  from "./components/AddUser";
+import AddUser from "./components/AddUser";
+
 /*import addUser from "./components/AddUser";*/
 
 
@@ -12,7 +13,7 @@ class App extends React.Component {
         this.state = {
             users: [
                 {
-                    id:1,
+                    id: 1,
                     name: 'Bob',
                     lastname: 'Marley',
                     age: 43,
@@ -20,22 +21,25 @@ class App extends React.Component {
                     isHappy: true
                 },
                 {
-                    id:2,
+                    id: 2,
                     name: 'Jon',
                     lastname: 'Weak',
                     age: 33,
                     about: 'Lorem',
                     isHappy: false
                 },
-            this.addUser = this.addUser.bind(this)
+                this.addUser = this.addUser.bind(this),
+                this.deleteUser = this.deleteUser.bind(this)
             ]
 
-        }    }
+        }
+    }
+
     render() {
         return (<div>
             <Header title="List users"/>
             <main>
-                <Users users={this.state.users}/>
+                <Users users={this.state.users} onDellete={this.deleteUser}/>
             </main>
             <aside>
                 <AddUser onAdd={this.addUser}/>
@@ -43,9 +47,17 @@ class App extends React.Component {
 
         </div>)
     }
-    addUser(user){
-        const id = this.state.users.length +1
+
+    deleteUser(id) {
+        this.setState({
+            users: this.state.users.filter((el) => el.id !==id)/*перебираю массив фильтром и перезаписываю все кроме id что передается в этот метод*/
+        })
+    }
+
+    addUser(user) {
+        const id = this.state.users.length + 1
         this.setState({users: [...this.state.users, {id, ...user}]})
     }
 }
+
 export default App
